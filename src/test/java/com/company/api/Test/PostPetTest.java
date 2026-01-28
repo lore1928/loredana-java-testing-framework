@@ -1,20 +1,18 @@
-package com.company.api.Test;
+package com.company.api.test;
 
-import com.company.api.BaseTest.BaseTest;
-import com.company.api.BaseTest.RequestSpecFactory;
-import com.company.api.Listeners.TestListener;
-import com.company.api.Models.PetCategoryRequest;
-import com.company.api.Models.PetRequest;
-import com.company.api.Models.PetTagRequest;
-import com.company.api.UserClient.PetClient;
-import com.company.api.Utils.ConfigReader;
+import com.company.api.baseTest.BaseTest;
+import com.company.api.baseTest.RequestSpecFactory;
+import com.company.api.listeners.TestListener;
+import com.company.api.models.PetCategoryRequest;
+import com.company.api.models.PetRequest;
+import com.company.api.models.PetTagRequest;
+import com.company.api.client.PetClient;
+import com.company.api.utils.ConfigReader;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.qameta.allure.Allure;
 import io.restassured.response.Response;
 import org.testng.annotations.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;

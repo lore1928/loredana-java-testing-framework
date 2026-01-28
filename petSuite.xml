@@ -4,12 +4,12 @@
 <suite name="RegressionSuite" verbose="1" parallel="methods" thread-count="5">
     <!--    <suite name="AutomationSuite" verbose="1" parallel="false">-->
     <listeners>
-        <listener class-name="com.company.api.Listeners.TestListener"/>
+        <listener class-name="com.company.api.listeners.TestListener"/>
     </listeners>
 
     <test name="Regression">
         <classes>
-            <class name="com.company.api.Test.PostPetTest"/>
+            <class name="com.company.api.test.PostPetTest"/>
         </classes>
     </test>
 

@@ -1,7 +1,6 @@
-package com.company.api.BaseTest;
+package com.company.api.baseTest;
 
-import com.company.api.Utils.ConfigReader;
-import io.restassured.response.Response;
+import com.company.api.utils.ConfigReader;
 import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {

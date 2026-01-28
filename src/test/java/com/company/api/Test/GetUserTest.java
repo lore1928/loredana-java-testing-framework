@@ -1,12 +1,11 @@
-package com.company.api.Test;
+package com.company.api.test;
 
-import com.company.api.BaseTest.BaseTest;
-import com.company.api.BaseTest.RequestSpecFactory;
-import com.company.api.Listeners.TestListener;
-import com.company.api.UserClient.UserClient;
-import com.company.api.Utils.ConfigReader;
-import com.company.api.Utils.DataProviders;
-import io.qameta.allure.Allure;
+import com.company.api.baseTest.BaseTest;
+import com.company.api.baseTest.RequestSpecFactory;
+import com.company.api.listeners.TestListener;
+import com.company.api.client.UserClient;
+import com.company.api.utils.ConfigReader;
+import com.company.api.utils.DataProviders;
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
@@ -36,9 +35,8 @@ public class GetUserTest extends BaseTest {
         //the sleep was added to demonstrate the parallel run
         Thread.sleep(2000);
 
-        Response response = UserClient.getUserClient(userId, Duration.ofSeconds(30), Duration.ofSeconds(2));
+        UserClient.getUserClient(userId, Duration.ofSeconds(30), Duration.ofSeconds(2));
 
-        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
         }
 
     @Test(dataProvider = "getUsersProviderMethod",
@@ -53,7 +51,6 @@ public class GetUserTest extends BaseTest {
         assertTrue(response.getBody().asString().contains(expectedName),
                 "Response should contain user name: " + expectedName);
 
-        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
     }
 
     @Test
@@ -68,7 +65,6 @@ public class GetUserTest extends BaseTest {
         assertEquals(response.getContentType(), "application/json",
                 "Content-Type should be application/json");
 
-        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
     }
 
     @Test
@@ -82,7 +78,6 @@ public class GetUserTest extends BaseTest {
         assertEquals(response.getStatusCode(), 200, "Status code should be 200");
         assertNotNull(response.getHeader("Content-Type"), "Content-Type header should be present");
 
-        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
     }
 
     @Test
@@ -97,7 +92,6 @@ public class GetUserTest extends BaseTest {
         assertTrue(response.getTime() < 5000,
                 "Response time should be less than 5 seconds, actual: " + response.getTime() + "ms");
 
-        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
     }
 
     // ==================== NEGATIVE TESTS ====================
@@ -112,7 +106,6 @@ public class GetUserTest extends BaseTest {
 
         assertEquals(response.getStatusCode(), 200, "Status code should be 200 for non-existent user");
 
-        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
     }
 
     @Test
@@ -126,7 +119,6 @@ public class GetUserTest extends BaseTest {
         assertTrue(response.getStatusCode() == 200,
                 "Status code should be 400 or 404 for zero ID, actual: " + response.getStatusCode());
 
-        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
     }
 
     @Test
@@ -140,7 +132,6 @@ public class GetUserTest extends BaseTest {
         assertTrue(response.getStatusCode() == 200,
                 "Status code should be 200 for negative ID, actual: " + response.getStatusCode());
 
-        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
     }
 
     @Test
@@ -154,7 +145,6 @@ public class GetUserTest extends BaseTest {
         assertTrue(response.getStatusCode() == 200,
                 "Status code should be 200 for very large ID, actual: " + response.getStatusCode());
 
-        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
     }
 
     @Test(dataProvider = "invalidUserIds",
@@ -169,7 +159,6 @@ public class GetUserTest extends BaseTest {
         assertTrue(response.getStatusCode() >= 200,
                 "Status code should indicate error for " + description + ", actual: " + response.getStatusCode());
 
-        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
     }
 
     @Test
@@ -183,7 +172,6 @@ public class GetUserTest extends BaseTest {
                 assertTrue(response.getStatusCode() == 401,
                         "Status code should be 401");
 
-            Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
             } catch (IllegalArgumentException e) {
                 System.out.println("Illegal Argument exception");
             }
@@ -198,7 +186,6 @@ public class GetUserTest extends BaseTest {
 
             assertTrue(response.getStatusCode() == 401 || response.getStatusCode() == 403,
                     "Status code should be 401 or 403 with invalid API key, actual: " + response.getStatusCode());
-        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
 
     }
 }

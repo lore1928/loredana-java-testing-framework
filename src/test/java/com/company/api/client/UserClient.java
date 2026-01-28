@@ -1,35 +1,40 @@
-package com.company.api.UserClient;
+package com.company.api.client;
 
-import com.company.api.BaseTest.RequestSpecFactory;
-import com.company.api.Utils.PollingUtils;
+import com.company.api.baseTest.RequestSpecFactory;
+import com.company.api.utils.EnvReader;
+import com.company.api.utils.PollingUtils;
+import io.qameta.allure.Allure;
 import io.restassured.response.Response;
 
 import java.time.Duration;
+import java.util.logging.Logger;
 
 import static io.restassured.RestAssured.given;
 
 public class UserClient {
 
     public static Response getUserClient(Integer id) {
-         String xApiKey = System.getProperty("xApiKey");
 
-        Response response = given().log().all()
-                .spec(RequestSpecFactory.getSpec())
-                .header("x-api-key", xApiKey)
-                .when()
-                .get("/user/" + id);
-        System.out.println(response.body().prettyPrint());
+        Response response = getUserClient(id, EnvReader.getApiKey());
+
+        Logger.getLogger(response.body().prettyPrint());
+        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
+
 
         return response;
     }
 
     public static Response getUserClient(Integer id, String xApiKey) {
-        Response response = given().log().all()
+        Response response = given()
                 .spec(RequestSpecFactory.getSpec())
                 .header("x-api-key", xApiKey)
+                .log().all()
                 .when()
                 .get("/user/" + id);
-        System.out.println(response.body().prettyPrint());
+
+        Logger.getLogger(response.body().prettyPrint());
+        Allure.addAttachment("Response Body", "application/json", response.body().prettyPrint());
+
         return response;
     }
 
