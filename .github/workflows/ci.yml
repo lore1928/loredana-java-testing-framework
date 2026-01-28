@@ -23,7 +23,7 @@ jobs:
 
       - name: Run TestNG tests
         run: |
-          mvn clean test -DsuiteXmlFile=regression.xml -DxApiKey=$ {{ secrets.X_API_KEY }} -Denv=qa 
+          mvn clean test -DsuiteXmlFile=regression.xml -DxApiKey=${{ secrets.X_API_KEY }} -Denv=qa 
 
       - name: Generate Allure report
         if: always()
